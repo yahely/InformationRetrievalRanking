@@ -1,0 +1,4 @@
+queryFile=queries.txt
+docsFile=docs.txt
+outpotFile=output.txt
+retrievalAlgorithm=basic
