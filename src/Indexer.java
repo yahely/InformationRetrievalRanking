@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -25,9 +26,11 @@ public class Indexer {
 	private IndexWriter writer;
 
 	public Indexer(String indexDirectoryPath) throws IOException{
+		
+		Analyzer analyzer = new StandardAnalyzer();
 	   //this directory will contain the indexes
 	   Directory indexDirectory = FSDirectory.open(Paths.get(indexDirectoryPath));
-	   IndexWriterConfig conf= new IndexWriterConfig(new WhitespaceAnalyzer());
+	   IndexWriterConfig conf= new IndexWriterConfig(analyzer);
 	   //create the indexer
 	   writer = new IndexWriter(indexDirectory,conf);
 	   
@@ -52,14 +55,14 @@ public class Indexer {
 
 		return document;
 	}
-	
+
    private void indexFile(File file) throws IOException{
 	      System.out.println("Indexing "+file.getCanonicalPath());
 	      Document document = getDocument(file);
 	      writer.addDocument(document);
 	   }
 
-   public int createIndex(String dataDirPath, FileFilter filter) 
+	public int createIndex(String dataDirPath, FileFilter filter) 
       throws IOException{
       //get all files in the data directory
 	      File[] files = new File(dataDirPath).listFiles();

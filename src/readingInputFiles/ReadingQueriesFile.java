@@ -10,7 +10,7 @@ public class ReadingQueriesFile {
 	public String [] dictNumberQueryToQuery; 
 	int numberQueries;
 	
-	ReadingQueriesFile(String queryFileName)
+	public ReadingQueriesFile(String queryFileName)
 	{
 		this.queriesFileName = queryFileName;
 		numberQueries = 30;

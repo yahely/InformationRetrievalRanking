@@ -16,6 +16,8 @@ public class Test {
 		
 		String [] dict= queriesFile.getDictonaryNumberQueryToQuery();
 		
+		CreateInputFiles createInputFiles=new CreateInputFiles(parameterFilePath);
+		createInputFiles.Create("D:\\Lucene\\Index");
 
 		int x=0;
 	}
