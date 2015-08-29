@@ -26,19 +26,6 @@ public class Searcher {
    DirectoryReader indexDirectory;
    
    public Searcher(String indexDirectoryPath) throws IOException{
-	   	/*// Now search the index:
-	    DirectoryReader ireader = DirectoryReader.open(directory);
-	    IndexSearcher isearcher = new IndexSearcher(ireader);
-	    // Parse a simple query that searches for "text":
-	    QueryParser parser = new QueryParser("fieldname", analyzer);
-	    Query query = parser.parse("text");
-	    ScoreDoc[] hits = isearcher.search(query, null, 1000).scoreDocs;
-	    assertEquals(1, hits.length);
-	    // Iterate through the results:
-	    for (int i = 0; i < hits.length; i++) {
-	      Document hitDoc = isearcher.doc(hits[i].doc);
-	      assertEquals("This is the text to be indexed.", hitDoc.get("fieldname"));
-	    }*/
 	    Directory directory = FSDirectory.open(Paths.get(indexDirectoryPath));
 	    indexDirectory = DirectoryReader.open(directory);
 	    indexSearcher = new IndexSearcher(indexDirectory);
