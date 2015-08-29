@@ -15,22 +15,42 @@ import java.nio.file.Paths;
  */
 public class ReadingParameterFile {
 	
-	static String parameterFileName;
-	static String queryFileName;
-	static String docsFileName;
-	static String outputFileName;
-	static String retrievalAlgorithmType;
+	String parameterFileName;
+	String queryFileName;
+	String docsFileName;
+	String outputFileName;
+	String retrievalAlgorithmType;
 	
-	public ReadingParameterFile()
+	public ReadingParameterFile(String parameterFilePath)
 	{
-		parameterFileName = InputConstants.PARAMETER_FILE;
-		queryFileName = InputConstants.EMPTY_STRING;
-		docsFileName = InputConstants.EMPTY_STRING;;
-		outputFileName = InputConstants.EMPTY_STRING;;
-		retrievalAlgorithmType = InputConstants.EMPTY_STRING;;
+		parameterFileName = parameterFilePath;
+		queryFileName = "";
+		docsFileName = "";
+		outputFileName = "";
+		retrievalAlgorithmType = "";
 	}
 	
-	public static void readFile() throws IOException 
+	public String getQueryFileName()
+	{
+		return queryFileName;
+	}
+	
+	public String getDocsFileName()
+	{
+		return docsFileName;
+	}
+	
+	public String getOutputFileName()
+	{
+		return outputFileName;
+	}
+	
+	public String getRetrievalAlgorithmType()
+	{
+		return retrievalAlgorithmType;
+	}
+	
+	public void readFile() throws IOException 
 	{
 		
 		String content;
@@ -41,16 +61,16 @@ public class ReadingParameterFile {
 		content = new String(bytesContentFile);
 		
 		splitedContent = content.split("queryFile=");
-		queryFileName = splitedContent[0];
+		queryFileName = splitedContent[1].split("\r\n")[0];
 		
 		splitedContent = content.split("docsFile=");
-		docsFileName = splitedContent[0];
+		docsFileName = splitedContent[1].split("\r\n")[0];
 		
 		splitedContent = content.split("outpotFile=");
-		outputFileName = splitedContent[0];
+		outputFileName = splitedContent[1].split("\r\n")[0];
 		
 		splitedContent = content.split("retrievalAlgorithm=");
-		retrievalAlgorithmType = splitedContent[0];
+		retrievalAlgorithmType = splitedContent[1].split("\r\n")[0];
 
 	}
 	
