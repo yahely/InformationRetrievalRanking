@@ -53,5 +53,33 @@ public class Indexer {
 		return document;
 	}
 	
+   private void indexFile(File file) throws IOException{
+	      System.out.println("Indexing "+file.getCanonicalPath());
+	      Document document = getDocument(file);
+	      writer.addDocument(document);
+	   }
 
+   public int createIndex(String dataDirPath, FileFilter filter) 
+      throws IOException{
+      //get all files in the data directory
+	      File[] files = new File(dataDirPath).listFiles();
+
+	      for (File file : files) {
+	         if(!file.isDirectory()
+	            && !file.isHidden()
+	            && file.exists()
+	            && file.canRead()
+	            && filter.accept(file)
+	         ){
+	            indexFile(file);
+	         }
+	      }
+	      return writer.numDocs();
+	   }
+     
+	
+
+	public void close() throws CorruptIndexException, IOException{
+    writer.close();
+	}
 }
